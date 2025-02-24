@@ -1,5 +1,5 @@
 # Terraform YC Cost Estimation
-Resource cost estimation from Terraform plan for Yandex Cloud.
+Resource cost estimation based on the Terraform plan for Yandex Cloud.
 
 List of supported resources:
 ```
