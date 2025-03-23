@@ -49,6 +49,8 @@ class KubernetesNodeGroupProcessor(ResourceProcessor):
 
         if auto_scale:
             instance_num = auto_scale[0]["initial"]
+            if instance_num == 0:
+                instance_num = 1
         elif fixed_scale:
             instance_num = fixed_scale[0]["size"]
         else:

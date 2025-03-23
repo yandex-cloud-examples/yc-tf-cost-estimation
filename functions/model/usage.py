@@ -34,18 +34,18 @@ class UsageCollector:
             summary[key]["amount"] += amount
             summary[key]["cost"] += cost
         
-        # Convert the summary to a list of dictionaries
+        # Convert the summary to a list of dictionaries with lowercase keys
         result = []
         for key, value in summary.items():
             sku, full_name, unit, resource_name, resource_type = key
             result.append({
-                "SKU": sku,
-                "Description": full_name,
-                "Amount": value["amount"],
-                "Cost(RUB)": f"{value['cost']:.2f}",
-                "Unit": unit,
-                "Resource Name": resource_name,
-                "Resource Type": resource_type
+                "sku_id": sku,
+                "sku_name": full_name,
+                "amount": value["amount"],
+                "cost": value["cost"],
+                "unit": unit,
+                "resource_name": resource_name,
+                "resource_type": resource_type
             })
 
         return result

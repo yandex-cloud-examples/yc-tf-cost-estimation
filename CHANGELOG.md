@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Estimation based on Terraform state.
 - Deeper Terraform integration for getting estimations in Terraform outputs.
 
+## [1.1.1] - 2025-03-23
+
+- Added calculation of the difference between planned and current state – supported in CLI and Cloud Function.
+- Added fallback if `tabulate` isn't available locally.
+
 ## [1.1.0] - 2025-03-22
 
 - Code decomposition for a better tomorrow.
