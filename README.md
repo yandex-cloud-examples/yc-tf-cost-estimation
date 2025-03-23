@@ -42,9 +42,21 @@ curl -H "Content-Type: application/json" "https://<API_GW_ADDRESS>" -d @plan.jso
 Result should look like this:
 ```
 {
-  "hourly": 441.69,
-  "monthly": 328619.71,
-  "currency": "RUB"
+  "current": {
+    "hourly": 0,
+    "monthly": 0
+  },
+  "planned": {
+    "hourly": 514.58,
+    "monthly": 382844.5
+  },
+  "difference": {
+    "hourly": 514.58,
+    "monthly": 382844.5,
+    "percentage": 0
+  },
+  "currency": "RUB",
+  "has_changes": true
 }
 ```
 You can also get the full results like this:
@@ -54,29 +66,34 @@ curl -H "Content-Type: application/json" "https://<API_GW_ADDRESS>?full=true" -d
 Which should look like this:
 ```
 {
-  "hourly": 514.58,
-  "monthly": 382844.5,
+  "current": {
+    "hourly": 0,
+    "monthly": 0
+  },
+  "planned": {
+    "hourly": 514.58,
+    "monthly": 382844.5
+  },
+  "difference": {
+    "hourly": 514.58,
+    "monthly": 382844.5,
+    "percentage": 0
+  },
   "currency": "RUB",
-  "usage": [
+  "has_changes": true,
+  "current_usage": [],
+  "planned_usage": [
     {
-      "SKU": "dn27ajm6m8mnfcshbi61",
-      "Description": "Fast network storage (SSD)",
-      "Amount": 10,
-      "Cost(RUB)": "0.17",
-      "Unit": "gbyte*hour",
-      "Resource Name": "vm-disk-1",
-      "Resource Type": "yandex_compute_disk"
-    },
-    {
-      "SKU": "dn27ajm6m8mnfcshbi61",
-      "Description": "Fast network storage (SSD)",
-      "Amount": 100,
-      "Cost(RUB)": "1.65",
-      "Unit": "gbyte*hour",
-      "Resource Name": "default",
-      "Resource Type": "yandex_compute_filesystem"
-    },
+      "sku_id": "dn27ajm6m8mnfcshbi61",
+      "sku_name": "Fast network storage (SSD)",
+      "amount": 10,
+      "cost": 0.1654166,
+      "unit": "gbyte*hour",
+      "resource_name": "vm-disk-1",
+      "resource_type": "yandex_compute_disk"
+    }
     ...
+  ]
 }
 ```
 
@@ -101,14 +118,21 @@ You can run the script locally like this:
 cd functions
 python app.py /path/plan.json
 ```
+
+To display full details you can run the script like this:
+```
+python app.py /path/plan.json --full
+```
+
 This will print the cost estimations in table format.
 
-> Python `tabulate` package is required.
+> Python `tabulate` package is recommended to have installed, but the script can work without it.
 
 ## Cloud
 
 You can deploy this code as a Cloud Function in Yandex Cloud using Terraform module provided.
 
+- Generate `sku.json` file as described above.
 - Create a service account with `editor` role in cloud folder (or with more specific roles, if needed).
 - Create `key.json` file for service account authentication.
 - Alternatively, use OAuth authentication in Terraform provider.
@@ -123,4 +147,4 @@ terraform apply
 
 This will create a Cloud Function and an API Gateway for access.
 
-You can send the requests to the API Gateway FQDN, as described in the Demo section.
+You can send the requests to the API Gateway FQDN, as described in the **Demo** section.
