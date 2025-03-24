@@ -36,7 +36,7 @@ terraform plan -out=plan.tfplan > /dev/null && terraform show -json plan.tfplan 
 
 Send the plan to get cost estimation results:
 ```
-curl -H "Content-Type: application/json" "https://<API_GW_ADDRESS>" -d @plan.json | jq
+curl -H "Content-Type: application/json" "https://tf.kirsh.cloud" -d @plan.json | jq
 ```
 
 Result should look like this:
@@ -61,7 +61,7 @@ Result should look like this:
 ```
 You can also get the full results like this:
 ```
-curl -H "Content-Type: application/json" "https://<API_GW_ADDRESS>?full=true" -d @plan.json | jq
+curl -H "Content-Type: application/json" "https://tf.kirsh.cloud?full=true" -d @plan.json | jq
 ```
 Which should look like this:
 ```
