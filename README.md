@@ -1,3 +1,7 @@
+> Moved to https://github.com/terraform-yc-modules/terraform-yc-cost-estimation
+
+> This repository is archived.
+
 # Terraform YC Cost Estimation
 Resource cost estimation based on the Terraform plan for Yandex Cloud.
 
